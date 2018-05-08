@@ -169,18 +169,16 @@
 </div>
 <div>
     <div class="guage">
-        <h1 id="lap1" style="font-size: 50px">0</h1>
+        <h1 style="font-size: 50px"><span id="lap1">0</span><span id="vtime1"></span></h1>
     </div>
     <div class="guage">
-        <h1 id="lap2" style="font-size: 50px">0</h1>
-
+        <h1 style="font-size: 50px"><span id="lap2">0</span><span id="vtime2"></span></h1>
     </div>
     <div class="guage">
-        <h1 id="lap3" style="font-size: 50px">0</h1>
-
+        <h1 style="font-size: 50px"><span id="lap3">0</span><span id="vtime3"></span></h1>
     </div>
     <div class="guage">
-        <h1 id="lap4" style="font-size: 50px">0</h1>
+        <h1 style="font-size: 50px"><span id="lap4">0</span><span id="vtime4"></span></h1>
     </div>
 
 </div>
@@ -409,7 +407,19 @@
     var lapCount = 10
 
 
-    //time
+    //------------------------
+    //Stop Watch
+    //------------------------
+
+    var seconds = 0;
+    var tens = 0;
+    var appendTens = document.getElementById("tens")
+    var appendSeconds = document.getElementById("seconds")
+    var buttonStart = document.getElementById('button-start');
+    var buttonStop = document.getElementById('button-stop');
+    var buttonReset = document.getElementById('button-reset');
+    var Interval;
+
 
     var client = mqtt.connect('ws://192.168.8.100:3000') // you add a ws:// url here
     client.subscribe("google_iobike/common")
@@ -499,6 +509,9 @@
         laps = [0, 0, 0, 0]
 
         start = 1
+
+        clearInterval(Interval);
+        Interval = setInterval(startTimer, 10);
     }
 
 
@@ -531,14 +544,26 @@
         obj.id = "4"
         client.publish('google_iobike/common', JSON.stringify(obj))
 
-
+        clearInterval(Interval);
     }
 
 
     function countLaps(vehicleId) {
-        laps[vehicleId - 1]++
-        console.log(laps.toString())
-        refreshLaps()
+        if (start === 1) {
+            laps[vehicleId - 1]++
+            if (laps[vehicleId - 1] === lapCount) {
+                var raceTime = "<span>" + seconds + "</span>:<span>" + tens + "</span>"
+                document.getElementById('lap' + vehicleId).style.visibility = 'hidden'
+                document.getElementById('vtime' + vehicleId).innerHTML = 'TIME: ' + raceTime
+                document.getElementById('vtime' + vehicleId).id = Math.random()
+
+            } else {
+                console.log(laps.toString())
+                refreshLaps()
+            }
+
+        }
+
     }
 
     function refreshLaps() {
@@ -546,6 +571,58 @@
         document.getElementById('lap2').innerHTML = laps[1]
         document.getElementById('lap3').innerHTML = laps[2]
         document.getElementById('lap4').innerHTML = laps[3]
+    }
+
+
+    // buttonStart.onclick = function () {
+    //
+    //     clearInterval(Interval);
+    //     Interval = setInterval(startTimer, 10);
+    // }
+    //
+    // buttonStop.onclick = function () {
+    //     clearInterval(Interval);
+    // }
+    //
+    //
+    // buttonReset.onclick = function () {
+    //     clearInterval(Interval);
+    //     tens = "00";
+    //     seconds = "00";
+    //     appendTens.innerHTML = tens;
+    //     appendSeconds.innerHTML = seconds;
+    // }
+
+
+    function startTimer() {
+        tens++;
+
+        if (tens < 9) {
+            appendTens.innerHTML = "0" + tens;
+        }
+
+        if (tens > 9) {
+            appendTens.innerHTML = tens;
+
+        }
+
+        if (tens > 99) {
+            console.log("seconds");
+            seconds++;
+            appendSeconds.innerHTML = "0" + seconds;
+            tens = 0;
+            appendTens.innerHTML = "0" + 0;
+        }
+
+        if (seconds > 9) {
+            appendSeconds.innerHTML = seconds;
+        }
+
+        if (seconds > 59) {
+            appen
+        }
+
+
     }
 
 </script>
