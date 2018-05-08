@@ -184,7 +184,7 @@
 </div>
 <div style="margin-top: 20px">
     <p style="color: #fff; font-size: 78px;" align="center">
-        <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tens">00</span></p>
+        <span id="seconds">00</span>:<span id="tens">00</span></p>
 </div>
 
 <div id="console"></div>
@@ -404,7 +404,7 @@
     var y4 = 0;
     var start = 0;
 
-    var lapCount = 10
+    var lapCount = 15
 
 
     //------------------------
@@ -415,14 +415,16 @@
     var tens = 0;
     var appendTens = document.getElementById("tens")
     var appendSeconds = document.getElementById("seconds")
-    var buttonStart = document.getElementById('button-start');
-    var buttonStop = document.getElementById('button-stop');
-    var buttonReset = document.getElementById('button-reset');
+    // var buttonStart = document.getElementById('button-start');
+    // var buttonStop = document.getElementById('button-stop');
+    // var buttonReset = document.getElementById('button-reset');
     var Interval;
 
 
-    var client = mqtt.connect('ws://192.168.8.100:3000') // you add a ws:// url here
+    var client = mqtt.connect('ws://192.168.8.105:3000') // you add a ws:// url here
+    var client2 = mqtt.connect('mqtt://mqtt2.iot.ideamart.io')
     client.subscribe("google_iobike/common")
+    // client.subscribe("google_iobike/common2")
 
     client.on("message", function (topic, payload) {
         // alert([topic, payload].join(": "))
@@ -432,22 +434,23 @@
         // console.log(y)
         if (f.id !== undefined && start === 1) {
             if (f.id == 1)
-                y1 = f.rev * 0.1
+                y1 = f.rev * 0.05
 
             if (f.id == 2)
-                y2 = f.rev * 0.1
+                y2 = f.rev * 0.05
 
             if (f.id == 3)
-                y3 = f.rev * 0.1
+                y3 = f.rev * 0.05
 
             if (f.id == 4)
-                y4 = f.rev * 0.1
+                y4 = f.rev * 0.05
 
         }
         else if (f.lap !== undefined) {
             countLaps(f.lap)
         }
     })
+    // client2.publish('google_iobike/common', x1)
 
     // client.publish("google_iobike/common", "hello world!")
 
@@ -492,7 +495,7 @@
     function startRace() {
 
         var startObj = {"id": "0", "rev": "0", "duration": "1"}
-        client.publish("google_iobike/common", JSON.stringify(startObj))
+        client2.publish("google_iobike/common", JSON.stringify(startObj))
 
         var greenLights = document.getElementsByClassName('lights-green')
 
@@ -520,7 +523,7 @@
         start = 0
 
         var stopObj = {"id": "0", "rev": "0", "duration": "0"}
-        client.publish("google_iobike/common", JSON.stringify(stopObj))
+        client2.publish("google_iobike/common", JSON.stringify(stopObj))
 
         var greenLights = document.getElementsByClassName('lights-green')
 
@@ -535,14 +538,14 @@
         }
 
 
-        var obj = {"id": "1", "rev": "0", "duration": "500"}
-        client.publish('google_iobike/common', JSON.stringify(obj))
-        obj.id = "2"
-        client.publish('google_iobike/common', JSON.stringify(obj))
-        obj.id = "3"
-        client.publish('google_iobike/common', JSON.stringify(obj))
-        obj.id = "4"
-        client.publish('google_iobike/common', JSON.stringify(obj))
+        // var obj = {"id": "1", "rev": "0", "duration": "500"}
+        // client.publish('google_iobike/common', JSON.stringify(obj))
+        // obj.id = "2"
+        // client.publish('google_iobike/common', JSON.stringify(obj))
+        // obj.id = "3"
+        // client.publish('google_iobike/common', JSON.stringify(obj))
+        // obj.id = "4"
+        // client.publish('google_iobike/common', JSON.stringify(obj))
 
         clearInterval(Interval);
     }
@@ -618,9 +621,9 @@
             appendSeconds.innerHTML = seconds;
         }
 
-        if (seconds > 59) {
-            appen
-        }
+        // if (seconds > 59) {
+        //     appen
+        // }
 
 
     }
