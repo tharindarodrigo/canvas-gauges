@@ -45,7 +45,7 @@
         }
 
         .light {
-            width: 33.3%;
+            width: 25%;
             float: left;
             align-content: center
         }
@@ -100,293 +100,327 @@
 
 <body style="width:100%;height:100%">
 
-    <div style="text-align: center; padding-top: 20px;">
-        <h1>SLOT CAR RACING</h1>
-    </div>
-    <div style="text-align: center">
+<div style="text-align: center; padding-top: 20px;">
+    <h1>POWER SLOT RACING</h1>
+</div>
+<div style="text-align: center">
 
+    <div>
+        <div style="width: 50%; float: left;">
+            <button class="myButton" onclick="startRace()">
+                Start
+            </button>
+        </div>
+        <div style="width: 50%; float: left;">
+            <button class="myButtonRed" onclick="stopRace()">
+                Stop
+            </button>
+        </div>
+    </div>
+    <div class="light" style="visibility: hidden">
         <div>
-            <div style="width: 50%; float: left;">
-                <button class="myButton">
-                    Start
-                </button>
-            </div>
-            <div style="width: 50%; float: left;">
-                <button class="myButtonRed">
-                    Stop
-                </button>
-            </div>
+            <button class="lights-red"></button>
         </div>
-        <div class="light">
-            <div>
-                <button class="lights-red"></button>
-            </div>
-            <div>
-                <button class="lights-green"></button>
-            </div>
+        <div>
+            <button class="lights-green"></button>
         </div>
-        <div class="light">
-            <div>
-                <button class="lights-red"></button>
-            </div>
-            <div>
-                <button class="lights-green"></button>
-            </div>
+    </div>
+    <div class="light" style="visibility: hidden">
+        <div>
+            <button class="lights-red"></button>
         </div>
-        <div class="light">
-            <div>
-                <button class="lights-red"></button>
-            </div>
-            <div>
-                <button class="lights-green"></button>
-            </div>
+        <div>
+            <button class="lights-green"></button>
         </div>
+    </div>
+    <div class="light" style="visibility: hidden">
+        <div>
+            <button class="lights-red"></button>
+        </div>
+        <div>
+            <button class="lights-green"></button>
+        </div>
+    </div>
+    <div class="light" style="visibility: hidden">
+        <div>
+            <button class="lights-red"></button>
+        </div>
+        <div>
+            <button class="lights-green"></button>
+        </div>
+    </div>
+
+</div>
+<div class="guage">
+    <h1>PLAYER 1</h1>
+    <canvas id="gauge1"></canvas>
+</div>
+<div class="guage">
+    <h1>PLAYER 2</h1>
+    <canvas id="gauge2"></canvas>
+</div>
+<div class="guage">
+    <h1>PLAYER 3</h1>
+    <canvas id="gauge3"></canvas>
+</div>
+<div class="guage">
+    <h1>PLAYER 4</h1>
+    <canvas id="gauge4"></canvas>
+</div>
+<div>
+    <div class="guage">
+        <h1 id="lap1" style="font-size: 50px">0</h1>
+    </div>
+    <div class="guage">
+        <h1 id="lap2" style="font-size: 50px">0</h1>
 
     </div>
     <div class="guage">
-        <h1>PLAYER 1</h1>
-        <canvas id="gauge1"></canvas>
+        <h1 id="lap3" style="font-size: 50px">0</h1>
+
     </div>
     <div class="guage">
-        <h1>PLAYER 2</h1>
-        <canvas id="gauge2"></canvas>
-    </div>
-    <div class="guage">
-        <h1>PLAYER 3</h1>
-        <canvas id="gauge3"></canvas>
-    </div>
-    <div class="guage">
-        <h1>PLAYER 4</h1>
-        <canvas id="gauge4"></canvas>
+        <h1 id="lap4" style="font-size: 50px">0</h1>
     </div>
 
+</div>
+<div style="margin-top: 20px">
+    <p style="color: #fff; font-size: 78px;" align="center">
+        <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tens">00</span></p>
+</div>
 
-    <div id="console"></div>
-    <script>
-        new RadialGauge({
-            renderTo: 'gauge1',
-            width: 400,
-            height: 400,
-            units: 'Km/h',
-            title: false,
-            value: 0,
-            minValue: 0,
-            maxValue: 100,
-            majorTicks: [
-                '0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'
-            ],
-            minorTicks: 2,
-            strokeTicks: false,
-            highlights: [{
-                    from: 60,
-                    to: 70,
-                    color: 'rgba(255,0,0,.2)'
-                },
-                {
-                    from: 70,
-                    to: 80,
-                    color: 'rgba(255,0,0,.4)'
-                },
-                {
-                    from: 80,
-                    to: 90,
-                    color: 'rgba(255,0,0,.6)'
-                },
-                {
-                    from: 90,
-                    to: 100,
-                    color: 'rgba(255,0,0,.8)'
-                }
-            ],
-            colorPlate: '#222',
-            colorMajorTicks: '#f5f5f5',
-            colorMinorTicks: '#ddd',
-            colorTitle: '#fff',
-            colorUnits: '#ccc',
-            colorNumbers: '#eee',
-            colorNeedle: 'rgba(240, 128, 128, 1)',
-            colorNeedleEnd: 'rgba(255, 160, 122, .9)',
-            valueBox: true,
-            animationRule: 'linear',
-            animationDuration: 300
-        }).draw();
+<div id="console"></div>
+<script>
+    new RadialGauge({
+        renderTo: 'gauge1',
+        width: 400,
+        height: 400,
+        units: 'Km/h',
+        title: false,
+        value: 0,
+        minValue: 0,
+        maxValue: 100,
+        majorTicks: [
+            '0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'
+        ],
+        minorTicks: 2,
+        strokeTicks: false,
+        highlights: [{
+            from: 60,
+            to: 70,
+            color: 'rgba(255,0,0,.2)'
+        },
+            {
+                from: 70,
+                to: 80,
+                color: 'rgba(255,0,0,.4)'
+            },
+            {
+                from: 80,
+                to: 90,
+                color: 'rgba(255,0,0,.6)'
+            },
+            {
+                from: 90,
+                to: 100,
+                color: 'rgba(255,0,0,.8)'
+            }
+        ],
+        colorPlate: '#222',
+        colorMajorTicks: '#f5f5f5',
+        colorMinorTicks: '#ddd',
+        colorTitle: '#fff',
+        colorUnits: '#ccc',
+        colorNumbers: '#eee',
+        colorNeedle: 'rgba(240, 128, 128, 1)',
+        colorNeedleEnd: 'rgba(255, 160, 122, .9)',
+        valueBox: true,
+        animationRule: 'linear',
+        animationDuration: 300
+    }).draw();
 
-        new RadialGauge({
-            renderTo: 'gauge2',
-            width: 400,
-            height: 400,
-            units: 'Km/h',
-            title: false,
-            value: 0,
-            minValue: 0,
-            maxValue: 100,
-            majorTicks: [
-                '0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'
-            ],
-            minorTicks: 2,
-            strokeTicks: false,
-            highlights: [{
-                    from: 60,
-                    to: 70,
-                    color: 'rgba(255,0,0,.2)'
-                },
-                {
-                    from: 70,
-                    to: 80,
-                    color: 'rgba(255,0,0,.4)'
-                },
-                {
-                    from: 80,
-                    to: 90,
-                    color: 'rgba(255,0,0,.6)'
-                },
-                {
-                    from: 90,
-                    to: 100,
-                    color: 'rgba(255,0,0,.8)'
-                }
-            ],
-            colorPlate: '#222',
-            colorMajorTicks: '#f5f5f5',
-            colorMinorTicks: '#ddd',
-            colorTitle: '#fff',
-            colorUnits: '#ccc',
-            colorNumbers: '#eee',
-            colorNeedle: 'rgba(240, 128, 128, 1)',
-            colorNeedleEnd: 'rgba(255, 160, 122, .9)',
-            valueBox: true,
-            animationRule: 'linear',
-            animationDuration: 300
-        }).draw();
+    new RadialGauge({
+        renderTo: 'gauge2',
+        width: 400,
+        height: 400,
+        units: 'Km/h',
+        title: false,
+        value: 0,
+        minValue: 0,
+        maxValue: 100,
+        majorTicks: [
+            '0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'
+        ],
+        minorTicks: 2,
+        strokeTicks: false,
+        highlights: [{
+            from: 60,
+            to: 70,
+            color: 'rgba(255,0,0,.2)'
+        },
+            {
+                from: 70,
+                to: 80,
+                color: 'rgba(255,0,0,.4)'
+            },
+            {
+                from: 80,
+                to: 90,
+                color: 'rgba(255,0,0,.6)'
+            },
+            {
+                from: 90,
+                to: 100,
+                color: 'rgba(255,0,0,.8)'
+            }
+        ],
+        colorPlate: '#222',
+        colorMajorTicks: '#f5f5f5',
+        colorMinorTicks: '#ddd',
+        colorTitle: '#fff',
+        colorUnits: '#ccc',
+        colorNumbers: '#eee',
+        colorNeedle: 'rgba(240, 128, 128, 1)',
+        colorNeedleEnd: 'rgba(255, 160, 122, .9)',
+        valueBox: true,
+        animationRule: 'linear',
+        animationDuration: 300
+    }).draw();
 
-        new RadialGauge({
-            renderTo: 'gauge3',
-            width: 400,
-            height: 400,
-            units: 'Km/h',
-            title: false,
-            value: 0,
-            minValue: 0,
-            maxValue: 100,
-            majorTicks: [
-                '0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'
-            ],
-            minorTicks: 2,
-            strokeTicks: false,
-            highlights: [{
-                    from: 60,
-                    to: 70,
-                    color: 'rgba(255,0,0,.2)'
-                },
-                {
-                    from: 70,
-                    to: 80,
-                    color: 'rgba(255,0,0,.4)'
-                },
-                {
-                    from: 80,
-                    to: 90,
-                    color: 'rgba(255,0,0,.6)'
-                },
-                {
-                    from: 90,
-                    to: 100,
-                    color: 'rgba(255,0,0,.8)'
-                }
-            ],
-            colorPlate: '#222',
-            colorMajorTicks: '#f5f5f5',
-            colorMinorTicks: '#ddd',
-            colorTitle: '#fff',
-            colorUnits: '#ccc',
-            colorNumbers: '#eee',
-            colorNeedle: 'rgba(240, 128, 128, 1)',
-            colorNeedleEnd: 'rgba(255, 160, 122, .9)',
-            valueBox: true,
-            animationRule: 'linear',
-            animationDuration: 300
-        }).draw();
+    new RadialGauge({
+        renderTo: 'gauge3',
+        width: 400,
+        height: 400,
+        units: 'Km/h',
+        title: false,
+        value: 0,
+        minValue: 0,
+        maxValue: 100,
+        majorTicks: [
+            '0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'
+        ],
+        minorTicks: 2,
+        strokeTicks: false,
+        highlights: [{
+            from: 60,
+            to: 70,
+            color: 'rgba(255,0,0,.2)'
+        },
+            {
+                from: 70,
+                to: 80,
+                color: 'rgba(255,0,0,.4)'
+            },
+            {
+                from: 80,
+                to: 90,
+                color: 'rgba(255,0,0,.6)'
+            },
+            {
+                from: 90,
+                to: 100,
+                color: 'rgba(255,0,0,.8)'
+            }
+        ],
+        colorPlate: '#222',
+        colorMajorTicks: '#f5f5f5',
+        colorMinorTicks: '#ddd',
+        colorTitle: '#fff',
+        colorUnits: '#ccc',
+        colorNumbers: '#eee',
+        colorNeedle: 'rgba(240, 128, 128, 1)',
+        colorNeedleEnd: 'rgba(255, 160, 122, .9)',
+        valueBox: true,
+        animationRule: 'linear',
+        animationDuration: 300
+    }).draw();
 
-        new RadialGauge({
-            renderTo: 'gauge4',
-            width: 400,
-            height: 400,
-            units: 'Km/h',
-            title: false,
-            value: 0,
-            minValue: 0,
-            maxValue: 100,
-            maxValue: 100,
-            majorTicks: [
-                '0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'
-            ],
-            minorTicks: 2,
-            strokeTicks: false,
-            highlights: [{
-                    from: 60,
-                    to: 70,
-                    color: 'rgba(255,0,0,.2)'
-                },
-                {
-                    from: 70,
-                    to: 80,
-                    color: 'rgba(255,0,0,.4)'
-                },
-                {
-                    from: 80,
-                    to: 90,
-                    color: 'rgba(255,0,0,.6)'
-                },
-                {
-                    from: 90,
-                    to: 100,
-                    color: 'rgba(255,0,0,.8)'
-                }
-            ],
-            colorPlate: '#222',
-            colorMajorTicks: '#f5f5f5',
-            colorMinorTicks: '#ddd',
-            colorTitle: '#fff',
-            colorUnits: '#ccc',
-            colorNumbers: '#eee',
-            colorNeedle: 'rgba(240, 128, 128, 1)',
-            colorNeedleEnd: 'rgba(255, 160, 122, .9)',
-            valueBox: true,
-            animationRule: 'linear',
-            animationDuration: 500
-        }).draw();
+    new RadialGauge({
+        renderTo: 'gauge4',
+        width: 400,
+        height: 400,
+        units: 'Km/h',
+        title: false,
+        value: 0,
+        minValue: 0,
+        maxValue: 100,
+        maxValue: 100,
+        majorTicks: [
+            '0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'
+        ],
+        minorTicks: 2,
+        strokeTicks: false,
+        highlights: [{
+            from: 60,
+            to: 70,
+            color: 'rgba(255,0,0,.2)'
+        },
+            {
+                from: 70,
+                to: 80,
+                color: 'rgba(255,0,0,.4)'
+            },
+            {
+                from: 80,
+                to: 90,
+                color: 'rgba(255,0,0,.6)'
+            },
+            {
+                from: 90,
+                to: 100,
+                color: 'rgba(255,0,0,.8)'
+            }
+        ],
+        colorPlate: '#222',
+        colorMajorTicks: '#f5f5f5',
+        colorMinorTicks: '#ddd',
+        colorTitle: '#fff',
+        colorUnits: '#ccc',
+        colorNumbers: '#eee',
+        colorNeedle: 'rgba(240, 128, 128, 1)',
+        colorNeedleEnd: 'rgba(255, 160, 122, .9)',
+        valueBox: true,
+        animationRule: 'linear',
+        animationDuration: 500
+    }).draw();
 
 
-        if (!window.addEventListener) {
-            window.addEventListener = function (evt, listener) {
-                window.attachEvent('on' + evt, listener);
-            };
-        }
-        if (!Array.prototype.forEach) {
-            Array.prototype.forEach = function (cb) {
-                var i = 0,
-                    s = this.length;
-                for (; i < s; i++) {
-                    cb && cb(this[i], i, this);
-                }
+    if (!window.addEventListener) {
+        window.addEventListener = function (evt, listener) {
+            window.attachEvent('on' + evt, listener);
+        };
+    }
+    if (!Array.prototype.forEach) {
+        Array.prototype.forEach = function (cb) {
+            var i = 0,
+                s = this.length;
+            for (; i < s; i++) {
+                cb && cb(this[i], i, this);
             }
         }
+    }
 
-        var y1 = 0;
-        var y2 = 0;
-        var y3 = 0;
-        var y4 = 0;
-        var y = 0;
+    var y1 = 0;
+    var y2 = 0;
+    var y3 = 0;
+    var y4 = 0;
+    var start = 0;
 
-        var client = mqtt.connect('ws://192.168.8.105:3000') // you add a ws:// url here
-        client.subscribe("google_iobike/common")
+    var lapCount = 10
 
-        client.on("message", function (topic, payload) {
-            // alert([topic, payload].join(": "))
 
-            var rpm = payload.toString();
-            f = JSON.parse(rpm)
-            // console.log(y)
+    //time
+
+    var client = mqtt.connect('ws://192.168.8.100:3000') // you add a ws:// url here
+    client.subscribe("google_iobike/common")
+
+    client.on("message", function (topic, payload) {
+        // alert([topic, payload].join(": "))
+
+        var rpm = payload.toString();
+        f = JSON.parse(rpm)
+        // console.log(y)
+        if (f.id !== undefined && start === 1) {
             if (f.id == 1)
                 y1 = f.rev * 0.1
 
@@ -399,61 +433,122 @@
             if (f.id == 4)
                 y4 = f.rev * 0.1
 
-            // console.log(y1, y2, y3, y4)
-        })
+        }
+        else if (f.lap !== undefined) {
+            countLaps(f.lap)
+        }
+    })
 
-        // client.publish("google_iobike/common", "hello world!")
+    // client.publish("google_iobike/common", "hello world!")
 
-        // animage all gauges on a page
-        window.addEventListener('load', function () {
-            document.gauges.forEach(function (gauge) {
-                // console.log(guages)
-                setInterval(function () {
-                        // console.log(gauge.options.renderTo)
+    // animage all gauges on a page
+    window.addEventListener('load', function () {
+        document.gauges.forEach(function (gauge) {
+            // console.log(guages)
+            setInterval(function () {
+                    // console.log(gauge.options.renderTo)
 
-                        switch (gauge.options.renderTo) {
-                            case 'gauge1':
-                                gauge.value = y1 *
-                                    (gauge.options.maxValue - gauge.options.minValue) +
-                                    gauge.options.minValue
-                                console.log(y1)
-                                break;
-                            case 'gauge2':
-                                gauge.value = y2 *
-                                    (gauge.options.maxValue - gauge.options.minValue) +
-                                    gauge.options.minValue
-                                break;
-                            case 'gauge3':
-                                gauge.value = y3 *
-                                    (gauge.options.maxValue - gauge.options.minValue) +
-                                    gauge.options.minValue
-                                break;
-                            case 'gauge4':
-                                gauge.value = y4 *
-                                    (gauge.options.maxValue - gauge.options.minValue) +
-                                    gauge.options.minValue
-                                break;
-
-                        }
-
-                    },
-                    //gauge.animation.duration
-                    500
-                );
-            });
+                    switch (gauge.options.renderTo) {
+                        case 'gauge1':
+                            gauge.value = y1 *
+                                (gauge.options.maxValue - gauge.options.minValue) +
+                                gauge.options.minValue
+                            // console.log(y1)
+                            break;
+                        case 'gauge2':
+                            gauge.value = y2 *
+                                (gauge.options.maxValue - gauge.options.minValue) +
+                                gauge.options.minValue
+                            break;
+                        case 'gauge3':
+                            gauge.value = y3 *
+                                (gauge.options.maxValue - gauge.options.minValue) +
+                                gauge.options.minValue
+                            break;
+                        case 'gauge4':
+                            gauge.value = y4 *
+                                (gauge.options.maxValue - gauge.options.minValue) +
+                                gauge.options.minValue
+                            break;
+                    }
+                },
+                gauge.animation.duration
+            );
         });
+    });
+
+    var laps = [0, 0, 0, 0]
+
+    function startRace() {
+
+        var startObj = {"id": "0", "rev": "0", "duration": "1"}
+        client.publish("google_iobike/common", JSON.stringify(startObj))
+
+        var greenLights = document.getElementsByClassName('lights-green')
+
+        for (var i = 0; i < greenLights.length; i++) {
+            greenLights[i].style.visibility = 'visible';
+        }
+
+        var redLights = document.getElementsByClassName('lights-red')
+
+        for (var j = 0; j < redLights.length; j++) {
+            redLights[j].style.visibility = 'hidden';
+        }
+
+        laps = [0, 0, 0, 0]
+
+        start = 1
+    }
 
 
-        // function startRace() {
-        //     client.publish("google_iobike/common", "Start Race")
-        // }
+    function stopRace() {
+
+        start = 0
+
+        var stopObj = {"id": "0", "rev": "0", "duration": "0"}
+        client.publish("google_iobike/common", JSON.stringify(stopObj))
+
+        var greenLights = document.getElementsByClassName('lights-green')
+
+        for (var i = 0; i < greenLights.length; i++) {
+            greenLights[i].style.visibility = 'hidden';
+        }
+
+        var redLights = document.getElementsByClassName('lights-red')
+
+        for (var j = 0; j < redLights.length; j++) {
+            redLights[j].style.visibility = 'visible';
+        }
 
 
-        // function stopRace() {
-        //     client.publish("google_iobike/common", "Stop Race")
-        // }
+        var obj = {"id": "1", "rev": "0", "duration": "500"}
+        client.publish('google_iobike/common', JSON.stringify(obj))
+        obj.id = "2"
+        client.publish('google_iobike/common', JSON.stringify(obj))
+        obj.id = "3"
+        client.publish('google_iobike/common', JSON.stringify(obj))
+        obj.id = "4"
+        client.publish('google_iobike/common', JSON.stringify(obj))
 
-    </script>
+
+    }
+
+
+    function countLaps(vehicleId) {
+        laps[vehicleId - 1]++
+        console.log(laps.toString())
+        refreshLaps()
+    }
+
+    function refreshLaps() {
+        document.getElementById('lap1').innerHTML = laps[0]
+        document.getElementById('lap2').innerHTML = laps[1]
+        document.getElementById('lap3').innerHTML = laps[2]
+        document.getElementById('lap4').innerHTML = laps[3]
+    }
+
+</script>
 </body>
 
 </html>
